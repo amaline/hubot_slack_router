@@ -2,6 +2,7 @@ FROM node:latest
 
 MAINTAINER Al Maline (copied from Lin Wen Chun)
 
+
 RUN apt-get -q update
 RUN apt-get -qy install git-core
 
@@ -9,6 +10,10 @@ RUN npm install -g hubot yo generator-hubot coffee-script
 
 RUN adduser --disabled-password --gecos "" hubot; \
   echo "hubot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+ADD ./certs /usr/local/share/ca-certificates/
+
+RUN update-ca-certificates
 
 ENV HOME /home/hubot
 
