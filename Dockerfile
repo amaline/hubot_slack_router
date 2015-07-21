@@ -6,7 +6,8 @@ MAINTAINER Al Maline (copied from Lin Wen Chun)
 RUN apt-get -q update
 RUN apt-get -qy install git-core redis-server
 
-RUN npm install -g hubot yo generator-hubot coffee-script
+RUN npm install -g hubot yo generator-hubot coffee-script ;\
+    npm config -g set strict-ssl false
 
 RUN adduser --disabled-password --gecos "" hubot; \
   echo "hubot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -17,7 +18,7 @@ RUN update-ca-certificates
 
 ENV HOME /home/hubot
 
-USER hubot
+#USER hubot
 
 WORKDIR /home/hubot
 
