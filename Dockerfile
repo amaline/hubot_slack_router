@@ -4,7 +4,7 @@ MAINTAINER Al Maline (copied from Lin Wen Chun)
 
 
 RUN apt-get -q update
-RUN apt-get -qy install git-core
+RUN apt-get -qy install git-core redis-server
 
 RUN npm install -g hubot yo generator-hubot coffee-script
 
@@ -21,7 +21,6 @@ USER hubot
 
 WORKDIR /home/hubot
 
-RUN yo hubot ;\
-    npm install hubot-slack --save
+RUN yo hubot --owner "Al Maline <amaline@yahoo.com>" --name="eabot" --description="Slack chat-bot for EA" --adapter=slack
 
 CMD HUBOT_SLACK_TOKEN=$HUBOT_SLACK_TOKEN ./bin/hubot --adapter slack
