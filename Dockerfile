@@ -25,6 +25,9 @@ WORKDIR /home/hubot
 
 RUN yo hubot --owner "Al Maline <amaline@yahoo.com>" --name="eabot" --description="Slack chat-bot for EA" --adapter=slack
 
-RUN npm install hubot-stackstorm
+RUN npm install hubot-stackstorm ;\
+    cat external-scripts.json |sed -e 's/]/,"hubot-stackstorm"]/' > tmp.json ;\
+    cp tmp.json external-scripts.json ;\
+    rm tmp.json
 
 CMD HUBOT_SLACK_TOKEN=$HUBOT_SLACK_TOKEN ./bin/hubot --adapter slack
